@@ -31,6 +31,7 @@ async function fund() {
                 value: ethers.parseEther(ethAmount),
             }); 
             await listenForTransactionMine(transactionResponse, provider);
+            console.log("Done!");
         } catch(error) {
             console.log(error);
         }
@@ -39,11 +40,14 @@ async function fund() {
 
 function listenForTransactionMine(transactionResponse, provider) {
     console.log(`Mining ${transactionResponse.hash}...`);
-    provider.once(transactionResponse.hash, (transactionReceipt) => {
-        console.log(`Completed with ${transactionReceipt.confirmations} confirmations`);
+    return new Promise((resolve, reject) => {
+        provider.once(transactionResponse.hash, (transactionReceipt) => {
+            console.log(`Completed with ${transactionReceipt.confirmations} confirmations`);
+        resolve();
+        });
     });
 }
-
+//13:30:42
 //fund function
 
 
