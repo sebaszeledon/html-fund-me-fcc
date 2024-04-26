@@ -26,9 +26,13 @@ async function fund() {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
-        const transactionResponse = await contract.fund({
-            value: ethers.parseEther(ethAmount),
-        }); // 13:18:25
+        try{
+            const transactionResponse = await contract.fund({
+                value: ethers.parseEther(ethAmount),
+            }); 
+        } catch(error) {
+            console.log(error);
+        }
     }
 }
 
