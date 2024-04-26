@@ -15,6 +15,12 @@ async function connect() {
     }
 }
 
+async function getBalance() {
+    if (typeof window.ethereum !== "undefined") {
+        
+    }
+}
+
 async function fund() {
     const ethAmount = document.getElementById("ethAmount").value;
     console.log(`Funding with ${ethAmount}...`);
