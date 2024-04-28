@@ -65,5 +65,16 @@ function listenForTransactionMine(transactionResponse, provider) {
 //withdraw
 
 async function withdraw() {
-    
+    if (typeof window.ethereum !== "undefined") {
+        console.log("Withdrawing...")
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, abi, signer);
+        try {
+            const transactionResponse = await contract.withdraw();
+            await listenForTransactionMine(transactionResponse, provider);
+        } catch(error){
+            console.log(error)
+        }
+    }
 }
