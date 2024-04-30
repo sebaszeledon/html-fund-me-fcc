@@ -71,7 +71,7 @@ async function withdraw() {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(contractAddress, abi, signer);
         try {
-            const transactionResponse = await contract.withdraw();
+            const transactionResponse = await contract.cheaperWithdraw();
             await listenForTransactionMine(transactionResponse, provider);
         } catch(error){
             console.log(error)
